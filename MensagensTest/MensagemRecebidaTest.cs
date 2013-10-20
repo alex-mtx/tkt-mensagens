@@ -56,7 +56,7 @@ namespace MensagensTest
             msg.Correlacao = "123";
             msg.Criador = "dev";
             msg.Expiracao = 1;
-            msg.Origem = "origem";
+            msg.FilaOrigem = "origem";
             msg.Prioridade = 9;
             msg.TipoEntrega = TipoEntrega.EmMemoria;
             Console.WriteLine(msg.ToString());

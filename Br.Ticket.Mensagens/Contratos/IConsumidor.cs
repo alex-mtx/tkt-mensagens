@@ -21,7 +21,7 @@ namespace Br.Ticket.Mensagens.Contratos
         /// <para>Esta coleção lança diversos eventos, os quais podem ser observados pelo código cliente.</para>
         /// </summary>
         /// <param name="mensagens">A lista Observale aonde cada mensagem recebida será adicionada</param>
-        void IniciarConsumo(ObservableCollection<Mensagem> mensagens);
+        void IniciarConsumo(ObservableCollection<MensagemRecebida> mensagens);
 
         /// <summary>
         /// Encerra o consumo, liberando os recursos utilizados.

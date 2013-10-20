@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Br.Ticket.Mensagens.Consumidores.OracleAQ")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Adaptador para consumo de filas Oracle AQ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard")]
+[assembly: AssemblyCompany("Ticket")]
 [assembly: AssemblyProduct("Br.Ticket.Mensagens.Consumidores.OracleAQ")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2013")]
+[assembly: AssemblyCopyright("Copyright © Ticket 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,3 +34,8 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("Consumidores.OracleAQTest, PublicKey=00240000048000009400000006020000002400005253413100040000010001009f9fe559519627"
+                                                                +"f176fcbece848c3e6e2dcaf21211f960a177015225274544a192cf81f142b4260fcb12d7b5c1ec"
+                                                                +"f5a2869f8f38ab07848a24cef95ec3533a8865d7ed069bbdcd73d25462557bf722f8985436468e"
+                                                                +"351fe4e47d6909938e07f4f6352fe458ab779192767aff0906bede34996abfca0531d3c9d14af6"
+                                                                + "66516198")]

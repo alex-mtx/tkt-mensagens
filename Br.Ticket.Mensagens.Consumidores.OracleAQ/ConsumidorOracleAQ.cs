@@ -31,15 +31,26 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
 
         }
 
+
+
+        internal MensagemRecebida Traduz(OracleAQMessage mensagemAQ)
+        {
+
+
+
+            return new MensagemRecebida(null, null);
+
+        }
+
         internal void Listen(object mensagens)
         {
            
-            OracleConnection conListen = new OracleConnection(_dadosConexao);
+            OracleConnection conexao = new OracleConnection(_dadosConexao);
            
-            OracleAQQueue queueListen = new OracleAQQueue(_fila, conListen);
+            OracleAQQueue queueListen = new OracleAQQueue(_fila, conexao);
             try
             {
-                conListen.Open();
+                conexao.Open();
 
                 queueListen.MessageType = OracleAQMessageType.Xml;
 
@@ -75,7 +86,7 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
                         queueListen.Listen(null);
                     }
 
-                    OracleTransaction txn = conListen.BeginTransaction();
+                    OracleTransaction txn = conexao.BeginTransaction();
 
                     OracleAQMessage deqMsg = queueListen.Dequeue();
                     
@@ -106,8 +117,8 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
             {
                 // Close/Dispose objects
                 queueListen.Dispose();
-                conListen.Close();
-                conListen.Dispose();
+                conexao.Close();
+                conexao.Dispose();
             }
         }
 
@@ -151,7 +162,7 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
 
         internal string ExtrairNomeConsumidorDadosConexao(string dadosConexao)
         {
-
+            // TODO: tratar string conexão
             int posicaoInicial = dadosConexao.IndexOf("NomeConsumidor=");
             if (posicaoInicial.Equals(-1))
                 return dadosConexao;
@@ -162,12 +173,5 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
 
         }
 
-
-
-
-        public void IniciarConsumo(ObservableCollection<Mensagem> mensagens)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

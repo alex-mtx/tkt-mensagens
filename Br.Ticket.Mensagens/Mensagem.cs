@@ -30,7 +30,10 @@ namespace Br.Ticket.Mensagens
 
         public IDictionary<string, string> Cabecalhos { get; set; }
 
-        public string Origem { get; set; }
+        /// <summary>
+        /// Informa a fila de origem
+        /// </summary>
+        public string FilaOrigem { get; set; }
 
 
         
@@ -73,15 +76,16 @@ namespace Br.Ticket.Mensagens
         /// Para os media type consulte: 
         /// <seealso cref="https://www.ietf.org/assignments/media-types/"/>
         /// </para>
-        /// <para><example>text/plain</example></para>
-        /// <para><example>text/xml</example></para>
-        /// <para><example>application/json</example></para>
+        /// <see cref=""/>
+        /// <para><example>text/plain</example>
+        /// <example>text/xml</example>
+        /// <example>application/json</example></para>
         /// 
         /// <para>
         /// Para os char sets consulte: 
         /// <seealso cref="http://www.iana.org/assignments/character-sets/character-sets.xhtml"/>
         /// </para>
-        /// examplos
+        /// exemplos
         /// <para>
         /// <example>utf-8</example>
         /// <example>ascii</example>
@@ -93,7 +97,7 @@ namespace Br.Ticket.Mensagens
         /// Uma mensagem obrigatoriamente deve ter conteúdo e tipo de conteúdo.
         /// </summary>
         /// <param name="conteudo"></param>
-        /// <param name="mime"></param>
+        /// <param name="mime">Informa o consumidor da mensagem qual o tipo do conteúdo e qual encoding</param>
         /// <exception cref="ArgumentNullException"></exception>
         public Mensagem(byte[] conteudo, ContentType mime)
         {
@@ -104,6 +108,7 @@ namespace Br.Ticket.Mensagens
             if (mime == null)
                 throw new ArgumentNullException("O ContentType não pode ser nulo");
 
+
             Conteudo = new Byte[conteudo.Length];
             conteudo.CopyTo(Conteudo, 0);
 
@@ -113,7 +118,7 @@ namespace Br.Ticket.Mensagens
         public override string ToString()
         {
             var inicio = String.Format("[Correlação: {0}] [Criador: {1}] [Expiração: {2}] [Origem: {3}] [Prioridade: {4}] [Tipo Conteúdo: {5}] [Tipo Entrega: {6}] "
-                               , Correlacao, Criador, Expiracao, Origem, Prioridade, TipoConteudo.ToString(), TipoEntrega);
+                               , Correlacao, Criador, Expiracao, FilaOrigem, Prioridade, TipoConteudo.ToString(), TipoEntrega);
 
 
 
