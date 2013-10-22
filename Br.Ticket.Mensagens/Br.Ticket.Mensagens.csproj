@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,10 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsumidorFilaSection.cs" />
     <Compile Include="Facilitador.cs" />
     <Compile Include="Contratos\IConsumidor.cs" />
+    <Compile Include="MensagemEventArgs.cs" />
     <Compile Include="MensagemRecebida.cs" />
     <Compile Include="Mensagem.cs" />
+    <Compile Include="Observable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoEntrega.cs" />
   </ItemGroup>

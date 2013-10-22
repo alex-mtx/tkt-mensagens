@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net.Mime;
 using System.Text;
 using Br.Ticket.Mensagens;
-
 using NUnit.Framework;
-using System.Net.Mime;
-using System.IO;
+using System.Configuration;
 
 namespace MensagensTest
 {
@@ -44,9 +42,25 @@ namespace MensagensTest
         }
 
         [Test]
+        [Ignore("Verificar qual o problema")]
+        public void Instancia_ConfiguracaoConsumidorFila()
+        {
+            Assert.DoesNotThrow(()=>
+                {
+                    ConsumidorFilaSection config = Facilitador.ObterConfiguracao("consumidorFilaSection"); 
+            });
+
+        }
+
+        [Test]
         public void Instancia_IConsumidor_OracleAQ()
         {
+            
+            //Obs: este assembly não deve ser referenciado diretamente pela app cliente
+            //já que nosso objetivo é substituí-lo sem recompilar
             var assembly = "Plugins\\Br.Ticket.Mensagens.Consumidores.OracleAQ.dll";
+
+
             var caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, assembly);
 
             var classe = "Br.Ticket.Mensagens.Consumidores.OracleAQ.ConsumidorOracleAQ";

@@ -7,6 +7,7 @@
     using System.Net.Mime;
     using Br.Ticket.Mensagens.Contratos;
     using System.Reflection;
+    using System.Configuration;
 
     /// <summary>
     /// TODO: Update summary.
@@ -93,6 +94,34 @@
             return consumidor;
         }
 
+        /// <summary>
+        /// Método de conveniência para obter a instância da seção de configuração do App/Web.config.
+        /// </summary>
+        /// <returns></returns>
+        public static ConsumidorFilaSection ObterConfiguracao(string nomeSecao)
+        {
+            var config = new ConsumidorFilaSection();
 
+            try
+            {
+
+
+                var secao = ConfigurationManager.GetSection(nomeSecao);
+                
+                if (secao == null)
+                    throw new ConfigurationErrorsException(String.Format("Sessão '{0}' não foi encontrada no arquivo de configuração",nomeSecao));
+            
+                config = secao as ConsumidorFilaSection;
+
+            }
+            catch (ConfigurationErrorsException e)
+            {
+                // TODO: log
+                throw e;
+
+            }
+
+            return config;
+        }
     }
 }

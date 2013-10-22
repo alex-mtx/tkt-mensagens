@@ -16,7 +16,7 @@ namespace Br.Ticket.Mensagens
     {
 
 
-        private long? _expiracao = null;
+        
         private int? _prioridade = null;
 
         /// <summary>
@@ -38,15 +38,12 @@ namespace Br.Ticket.Mensagens
 
         
         /// <summary>
-        /// Tempo em milisegundos para a expiração da mensagem depois de publicada.
+        /// Tempo em segundos para a expiração da mensagem depois de publicada.
         /// <para>
         /// Null para não expirar.
         /// </para>
         /// </summary>
-        public long? Expiracao {
-            get { return _expiracao; }
-            set {_expiracao = value; }
-        }
+        public int Expiracao {get;set;}
 
         /// <summary>
         /// 0 (zero) é mais importante.
@@ -109,8 +106,8 @@ namespace Br.Ticket.Mensagens
                 throw new ArgumentNullException("O ContentType não pode ser nulo");
 
 
-            Conteudo = new Byte[conteudo.Length];
-            conteudo.CopyTo(Conteudo, 0);
+            Conteudo = conteudo;
+            
 
             TipoConteudo = mime;
         }

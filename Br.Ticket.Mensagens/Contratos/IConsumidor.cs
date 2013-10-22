@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 //using Br.Ticket.Mensageria;
 
 namespace Br.Ticket.Mensagens.Contratos
@@ -9,23 +10,25 @@ namespace Br.Ticket.Mensagens.Contratos
     {
         /// <summary>
         /// Configura os dados necessários para a conexão com o servidor e Fila.
+        /// <para>Útil para quando se mantém os parâmetros</para>
         /// Cada Adaptador possui requisitos próprios.
         /// </summary>
-        /// <param name="dadosConexao">Uma Conection String, em formato específico do Consumidor</param>
+        /// <param name="connectionString">Uma Conection String, em formato específico do Consumidor</param>
         /// <param name="fila">Nome da Fila</param>
-        void Configurar(string dadosConexao,string fila);
+        /// <param name="idAplicacaoConsumidora">Identificação da aplicação consumidora</param>
+        void Configurar(string connectionString,string fila,string idAplicacaoConsumidora);
 
         /// <summary>
         /// Inicia o consumo da fila informada.
-        /// <para>Cada mensagem recebida é adicionada à coleção de <paramref name="mensagens"/></para>
-        /// <para>Esta coleção lança diversos eventos, os quais podem ser observados pelo código cliente.</para>
+        /// <para>Esta coleção é ThreadSafe.</para>
         /// </summary>
-        /// <param name="mensagens">A lista Observale aonde cada mensagem recebida será adicionada</param>
-        void IniciarConsumo(ObservableCollection<MensagemRecebida> mensagens);
+        void Consumir();
 
         /// <summary>
         /// Encerra o consumo, liberando os recursos utilizados.
         /// </summary>
         void EncerrarConsumo();
+
+        event EventHandler MensagemRecebidaEvento;
     }
 }

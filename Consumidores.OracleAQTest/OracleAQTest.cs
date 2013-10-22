@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using System.Net.Mime;
+using Oracle.DataAccess.Client;
 
 namespace Consumidores.OracleAQTest
 {
@@ -15,10 +16,8 @@ namespace Consumidores.OracleAQTest
         public void Teste_Listen()
         {
 
-            var x = new ContentType("text/7777xml;charset=9iso-8859-1");
-            x.CharSet = "xISO-8859-1";
-
-            x.MediaType = "text/xml";
+            OracleConnectionStringBuilder builder = new OracleConnectionStringBuilder("user id=gp;password=gp;data source=//localhost:1521/xe;NomeConsumidor=GP_CONSUMER;fila=eventos");
+            
             
 
         }
