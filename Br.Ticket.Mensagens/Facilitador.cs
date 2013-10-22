@@ -1,13 +1,14 @@
-﻿namespace Br.Ticket.Mensagens
+﻿
+using System;
+using System.Text;
+using System.Net.Mime;
+using Br.Ticket.Mensagens.Contratos;
+using System.Reflection;
+using System.Configuration;
+
+namespace Br.Ticket.Mensagens
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Net.Mime;
-    using Br.Ticket.Mensagens.Contratos;
-    using System.Reflection;
-    using System.Configuration;
+   
 
     /// <summary>
     /// TODO: Update summary.
