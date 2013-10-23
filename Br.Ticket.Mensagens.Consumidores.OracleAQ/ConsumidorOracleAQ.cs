@@ -25,6 +25,7 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
         private OracleAQMessageType _tipoPayload;
         private bool _configurado;
         private static string _nomeThreadConsumir = "ConsumidorOracleAQ_Consumir";
+        private static  ConsumidorFilaSection _configFila;
       
         
 
@@ -53,6 +54,8 @@ namespace Br.Ticket.Mensagens.Consumidores.OracleAQ
             _idConsumidor = idAplicacaoConsumidora;
 
             _fila = fila;
+
+            
 
             _configurado = true;
 

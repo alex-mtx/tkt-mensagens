@@ -8,6 +8,7 @@ using Oracle.DataAccess.Types;
 
 using Br.Ticket.Mensagens.Contratos;
 using Br.Ticket.Mensagens;
+using System.IO;
 
 namespace ConsoleApp
 {
@@ -17,24 +18,39 @@ namespace ConsoleApp
         private static string _fila = "gp.EVENTOSCONTRATO_Q";
         static void Main(string[] args)
         {
-           
+
+            ///Veja o App.config seção 'consumidorFila'
+            ConsumidorFilaSection config = Facilitador.ObterConfiguracao("consumidorFila");
+            
+            
+            var caminhoAssemblyPlugin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.AssemblyPluginConsumidor);
+            
 
             Thread.CurrentThread.Name = "Main";
 
-            IConsumidor queuePubSubGP = Facilitador.InstanciarConsumidor(@"H:\tkt\Br.Ticket.Mensagens.All\Br.Ticket.Mensagens.Consumidores.OracleAQ\bin\Debug\Br.Ticket.Mensagens.Consumidores.OracleAQ.dll"
-                , "Br.Ticket.Mensagens.Consumidores.OracleAQ.ConsumidorOracleAQ");
-            queuePubSubGP.Configurar(_cn, _fila, "GP_CONSUMER");
+            //===== Uso do Adapter====//
+            //Cria a instância a partir de um assembly carregado dinamicamente //
+            IConsumidor queuePubSubGP = Facilitador.InstanciarConsumidor(caminhoAssemblyPlugin, config.ClassePluginConsumidor);
+            
+            //== configura e valida alguns itens ==//
+            queuePubSubGP.Configurar(_cn, _fila, config.IdAplicacaoConsumidora);
 
+            //== ANTES de iniciar o consumo, inscreva-se no evento para receber as mensagens ==//
             queuePubSubGP.MensagemRecebidaEvento += new EventHandler(Observer_MensagemRecebida);
 
-
+            //== inicia de fato a escuta na fila. Qualquer trecho bloqueante é executado em thread separada ==/
             queuePubSubGP.Consumir();
             
+
+            //helper que publica mensagens na fila. não faz parte do componente.
             Publica(_fila, 10);
 
             Console.ReadKey();
 
+            //=== chamar somente quando for encerrar o programa, como em .OnStop()===/
             queuePubSubGP.EncerrarConsumo();
+            
+            
             Console.ReadKey();
 
         }

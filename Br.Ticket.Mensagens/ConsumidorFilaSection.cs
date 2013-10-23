@@ -43,37 +43,51 @@ namespace Br.Ticket.Mensagens
             }
         }
 
-        [ConfigurationProperty("nomeAssembly", IsRequired = true)]
-        public string NomeAssembly
+        [ConfigurationProperty("assemblyPluginConsumidor", IsRequired = true)]
+        public string AssemblyPluginConsumidor
         {
             get
             {
 
-                return (string)this["nomeAssembly"];
+                return (string)this["assemblyPluginConsumidor"];
             }
             set
             {
 
-                this["nomeAssembly"] = value;
+                this["assemblyPluginConsumidor"] = value;
             }
         }
 
 
-        [ConfigurationProperty("nomeClasse", IsRequired = true)]
-        public string NomeClasse
+        [ConfigurationProperty("classePluginConsumidor", IsRequired = true)]
+        public string ClassePluginConsumidor
         {
             get
             {
 
-                return (string)this["nomeClasse"];
+                return (string)this["classePluginConsumidor"];
             }
             set
             {
 
-                this["nomeClasse"] = value;
+                this["classePluginConsumidor"] = value;
             }
         }
 
+        [ConfigurationProperty("idAplicacaoConsumidora", IsRequired = true)]
+        public string IdAplicacaoConsumidora
+        {
+            get
+            {
+
+                return (string)this["idAplicacaoConsumidora"];
+            }
+            set
+            {
+
+                this["idAplicacaoConsumidora"] = value;
+            }
+        }
 
 
     }

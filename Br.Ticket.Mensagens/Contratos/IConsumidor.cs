@@ -10,8 +10,6 @@ namespace Br.Ticket.Mensagens.Contratos
     {
         /// <summary>
         /// Configura os dados necessários para a conexão com o servidor e Fila.
-        /// <para>Útil para quando se mantém os parâmetros</para>
-        /// Cada Adaptador possui requisitos próprios.
         /// </summary>
         /// <param name="connectionString">Uma Conection String, em formato específico do Consumidor</param>
         /// <param name="fila">Nome da Fila</param>
@@ -20,8 +18,8 @@ namespace Br.Ticket.Mensagens.Contratos
 
         /// <summary>
         /// Inicia o consumo da fila informada.
-        /// <para>Esta coleção é ThreadSafe.</para>
-        /// </summary>
+        /// <para>Cada mensagem recebida da Fila será enviada pelo CallBack do Evento MensagemRecebidaEvento</para>
+         /// </summary>
         void Consumir();
 
         /// <summary>
@@ -29,6 +27,11 @@ namespace Br.Ticket.Mensagens.Contratos
         /// </summary>
         void EncerrarConsumo();
 
+        /// <summary>
+        /// Evento que entrega a instância da MensagemRecebida.
+        /// <para>Exemplo:<example > IConsumidor.MensagemRecebidaEvento += new EventHandler(Observer_MensagemRecebida) </example></para>
+        /// <para>Faça o TypeCast de EventArgs para MensagemEventArgs para acessar a MensagemRecebida no evento.</para>
+        /// </summary>
         event EventHandler MensagemRecebidaEvento;
     }
 }
